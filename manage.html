@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopDaily — Manage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">SHOP<span class="brand-accent">Daily</span></a>
+        <div class="ms-auto">
+            <a href="index.html" class="btn btn-outline-dark btn-sm rounded-pill px-3">
+                <i class="bi bi-shop me-1"></i> Store
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h4 class="fw-black mb-0">Product Management</h4>
+            <p class="text-muted small mb-0">Stock products</p>
+        </div>
+        <button class="btn btn-dark rounded-pill px-4" onclick="openCreateModal()">
+            <i class="bi bi-plus-lg me-1"></i> Add Product
+        </button>
+    </div>
+
+    <!-- Dashboard Stats -->
+    <div class="row g-3 mb-4" id="dashboard-stats">
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-num" id="stat-total">—</div>
+                <div class="stat-label">Total Products</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-num" id="stat-categories">—</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-num text-success" id="stat-instock">—</div>
+                <div class="stat-label">In Stock</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-num text-danger" id="stat-outstock">—</div>
+                <div class="stat-label">Out of Stock</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 d-flex gap-3 flex-wrap align-items-center justify-content-between">
+        <input type="text" id="manage-search" class="form-control" style="max-width:280px"
+            placeholder="Search products...">
+        <!-- Category Tabs -->
+        <div class="d-flex gap-2 flex-wrap" id="manage-cat-tabs">
+            <button class="btn btn-dark btn-sm rounded-pill px-3 manage-tab active" data-cat="">All</button>
+            <button class="btn btn-outline-dark btn-sm rounded-pill px-3 manage-tab" data-cat="Electronics">Electronics</button>
+            <button class="btn btn-outline-dark btn-sm rounded-pill px-3 manage-tab" data-cat="Clothing">Clothing</button>
+            <button class="btn btn-outline-dark btn-sm rounded-pill px-3 manage-tab" data-cat="Books">Books</button>
+            <button class="btn btn-outline-dark btn-sm rounded-pill px-3 manage-tab" data-cat="Food">Food</button>
+            <button class="btn btn-outline-dark btn-sm rounded-pill px-3 manage-tab" data-cat="Games">Games</button>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3 px-4">
+            <span class="fw-bold" id="table-category-label">All Products</span>
+            <span class="badge bg-dark rounded-pill" id="table-count">0</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-4">#</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="product-tbody">
+                    <tr><td colspan="7" class="text-center text-muted py-4">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content rounded-4 border-0 shadow text-center p-3">
+            <div class="modal-body">
+                <div class="fs-1 mb-2">🗑️</div>
+                <h6 class="fw-black mb-1">Delete Product?</h6>
+                <p class="text-muted small mb-3" id="delete-product-name"></p>
+                <p class="text-danger small mb-3">This cannot be undone.</p>
+                <div class="d-flex gap-2 justify-content-center">
+                    <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger rounded-pill px-4" id="confirm-delete-btn">
+                        <span id="delete-btn-text">Delete</span>
+                        <span id="delete-spinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Create / Edit -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0 px-4 pt-4">
+                <h5 class="modal-title fw-black" id="modal-title">Add Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-4">
+                <form id="product-form" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Name *</label>
+                        <input type="text" id="f-name" class="form-control" placeholder="Product name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Description</label>
+                        <textarea id="f-description" class="form-control" rows="3" placeholder="Description"></textarea>
+                    </div>
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label class="form-label fw-semibold small">Price ($) *</label>
+                            <input type="number" id="f-price" class="form-control" placeholder="0.00" step="0.01" min="0">
+                        </div>
+                        <div class="col">
+                            <label class="form-label fw-semibold small">Stock</label>
+                            <input type="number" id="f-stock" class="form-control" placeholder="0" min="0" value="0">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Category *</label>
+                        <select id="f-category" class="form-select">
+                            <option value="">-- Select --</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Books">Books</option>
+                            <option value="Food">Food</option>
+                            <option value="Games">Games</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Image</label>
+                        <div id="current-image-wrap" class="mb-2 d-none">
+                            <img id="current-image-preview" src="" alt="Current"
+                                 class="rounded" style="height:70px;object-fit:cover">
+                            <div class="form-text">Upload new to replace.</div>
+                        </div>
+                        <div id="image-preview-wrap" class="mb-2 d-none text-center">
+                            <img id="image-preview" src="" alt="Preview"
+                                 class="rounded border" style="max-height:120px;object-fit:cover">
+                        </div>
+                        <input type="file" id="f-image" class="form-control" accept="image/*">
+                        <div class="form-text">JPG, PNG, GIF, WEBP — max 5MB</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0 px-4 pb-4">
+                <button type="button" class="btn btn-outline-secondary rounded-pill px-4"
+                    data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-dark rounded-pill px-4" onclick="submitProduct()">
+                    <span id="save-btn-text"><i class="bi bi-save me-1"></i> Save</span>
+                    <span id="save-spinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer style="background:#1a1a2e;padding:1.5rem 0;margin-top:3rem">
+    <div class="container text-center" style="font-size:.82rem;color:#555">
+         2026 ShopDaily™. All Rights Reserved.
+    </div>
+</footer>
+
+<!-- Toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+        <div class="d-flex">
+            <div class="toast-body" id="toast-msg"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

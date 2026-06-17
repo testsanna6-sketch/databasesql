@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopDaily</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-black" href="index.html">SHOP<span class="brand-accent">Daily</span></a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="manage.html">Manage</a></li>
+            </ul>
+            <form class="d-flex gap-2 mt-2 mt-lg-0" id="search-form">
+                <input type="text" id="search-input" class="form-control search-input"
+                    placeholder="Search products..." autocomplete="off">
+                <select id="category-filter" class="form-select" style="max-width:130px">
+                    <option value="">All</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Books">Books</option>
+                    <option value="Food">Food</option>
+                    <option value="Games">Games</option>
+                </select>
+                <button type="submit" class="btn btn-dark px-3 rounded-2">
+                    <i class="bi bi-search"></i>
+                </button>
+                <!-- Cart button -->
+                <a href="cart.html" class="btn btn-outline-dark px-3 rounded-2 position-relative" id="cart-btn" title="View Cart">
+                    <i class="bi bi-bag"></i>
+                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+                          style="font-size:.65rem;transition:transform .2s">0</span>
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="hero-tag mb-3">✨ New Arrivals 2026</div>
+                <h1 class="hero-title">Discover<br><span class="hero-highlight">Everything</span><br>You Love</h1>
+                <p class="hero-sub mt-3 mb-4">Shop the latest Electronics, Clothing, Books,<br class="d-none d-md-block">Food & Games — all in one place.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="#products" class="btn btn-dark btn-lg px-5 rounded-pill fw-bold">Shop Now <i class="bi bi-arrow-right ms-1"></i></a>
+                </div>
+                <div class="hero-stats mt-5 d-flex gap-4 flex-wrap">
+                    <div><div class="stat-big">30+</div><div class="stat-small">Products</div></div>
+                    <div class="stat-divider"></div>
+                    <div><div class="stat-big">5</div><div class="stat-small">Categories</div></div>
+                    <div class="stat-divider"></div>
+                    <div><div class="stat-big">100%</div><div class="stat-small">Quality</div></div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="hero-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=700&h=500&fit=crop&auto=format"
+                         alt="Shop" class="hero-img">
+                    <!-- Floating badge 1 -->
+                    <div class="hero-badge badge1">
+                        <i class="bi bi-star-fill text-warning me-1"></i>
+                        <span>Top Rated</span>
+                    </div>
+                    <!-- Floating badge 2 -->
+                    <div class="hero-badge badge2">
+                        <i class="bi bi-bag-check-fill text-success me-1"></i>
+                        <span>30+ Products</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Category Banner Strip ── -->
+<section class="cat-strip py-4">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-6 col-md-4 col-lg-2-4">
+                <div class="cat-banner-card" onclick="filterCat('Electronics')" style="background:linear-gradient(135deg,#1a1a2e,#0f3460)">
+                    <i class="bi bi-cpu-fill cat-icon"></i>
+                    <div class="cat-name">Electronics</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2-4">
+                <div class="cat-banner-card" onclick="filterCat('Clothing')" style="background:linear-gradient(135deg,#1a472a,#2d6a4f)">
+                    <i class="bi bi-bag-fill cat-icon"></i>
+                    <div class="cat-name">Clothing</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2-4">
+                <div class="cat-banner-card" onclick="filterCat('Books')" style="background:linear-gradient(135deg,#7b2d00,#c0392b)">
+                    <i class="bi bi-book-fill cat-icon"></i>
+                    <div class="cat-name">Books</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2-4">
+                <div class="cat-banner-card" onclick="filterCat('Food')" style="background:linear-gradient(135deg,#7d3c00,#e67e22)">
+                    <i class="bi bi-cup-hot-fill cat-icon"></i>
+                    <div class="cat-name">Food</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-2-4">
+                <div class="cat-banner-card" onclick="filterCat('Games')" style="background:linear-gradient(135deg,#4a235a,#7d3c98)">
+                    <i class="bi bi-controller cat-icon"></i>
+                    <div class="cat-name">Games</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Products ── -->
+<div class="container py-4" id="products">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+        <div>
+            <h5 class="fw-black mb-0" id="product-count">All Products</h5>
+            <span class="text-muted small" id="product-total"></span>
+        </div>
+        <div class="d-flex gap-2 flex-wrap align-items-center">
+            <!-- Pills -->
+            <div class="d-flex gap-2 flex-wrap" id="pill-group">
+                <button class="btn btn-dark rounded-pill px-3 py-1 cat-pill active" data-cat="" style="font-size:.83rem">All</button>
+                <button class="btn btn-outline-dark rounded-pill px-3 py-1 cat-pill" data-cat="Electronics" style="font-size:.83rem">Electronics</button>
+                <button class="btn btn-outline-dark rounded-pill px-3 py-1 cat-pill" data-cat="Clothing" style="font-size:.83rem">Clothing</button>
+                <button class="btn btn-outline-dark rounded-pill px-3 py-1 cat-pill" data-cat="Books" style="font-size:.83rem">Books</button>
+                <button class="btn btn-outline-dark rounded-pill px-3 py-1 cat-pill" data-cat="Food" style="font-size:.83rem">Food</button>
+                <button class="btn btn-outline-dark rounded-pill px-3 py-1 cat-pill" data-cat="Games" style="font-size:.83rem">Games</button>
+            </div>
+            <!-- Sort -->
+            <select class="form-select form-select-sm w-auto" id="sort-select">
+                <option value="">Sort: Default</option>
+                <option value="price-asc">Price: Low → High</option>
+                <option value="price-desc">Price: High → Low</option>
+                <option value="name">Name: A → Z</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row g-4" id="product-grid">
+        <div class="col-12 text-center py-5">
+            <div class="spinner-border text-dark" role="status"></div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4" id="pagination"></div>
+</div>
+
+<!-- ── Newsletter ── -->
+<section class="newsletter-section py-5 text-center text-white mt-4">
+    <div class="container" style="max-width:540px">
+        <i class="bi bi-envelope-heart-fill fs-2 mb-3 d-block" style="color:#f5a623"></i>
+        <h3 class="fw-bold mb-2">Stay in the loop</h3>
+        <p class="mb-4" style="color:rgba(255,255,255,0.6)">Subscribe for exclusive offers and new arrivals.</p>
+        <div class="input-group">
+            <input type="email" class="form-control form-control-lg border-0" placeholder="Enter your email">
+            <button class="btn btn-warning px-4 fw-semibold text-white">Subscribe</button>
+        </div>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="main-footer py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="brand-text mb-2">SHOP<span class="brand-accent">Daily</span></div>
+                <p style="color:#777;font-size:.875rem">Discover unique products that inspire your lifestyle.</p>
+                <div class="social mt-3">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2 offset-lg-1">
+                <div class="col-title">Shop</div>
+                <ul>
+                    <li><a href="#">All Products</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="col-title">Support</div>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Shipping</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="col-title">Legal</div>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom d-flex flex-wrap justify-content-between gap-2">
+            <span>© 2026 ShopDaily™. All Rights Reserved.</span>
+            <span>Made with <i class="bi bi-heart-fill text-danger"></i> for your final project</span>
+        </div>
+    </div>
+</footer>
+
+<!-- Toast -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:999">
+    <div id="toast" class="toast align-items-center text-white border-0" role="alert">
+        <div class="d-flex">
+            <div class="toast-body" id="toast-msg"></div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/cart.js"></script>
+<script>
+function filterCat(cat) {
+    // Activate the right pill
+    document.querySelectorAll('.cat-pill').forEach(p => {
+        p.classList.remove('btn-dark','active');
+        p.classList.add('btn-outline-dark');
+    });
+    const target = document.querySelector(`.cat-pill[data-cat="${cat}"]`);
+    if (target) { target.classList.add('btn-dark','active'); target.classList.remove('btn-outline-dark'); }
+
+    const countEl = document.getElementById('product-count');
+    if (countEl) countEl.textContent = cat || 'All Products';
+
+    loadProducts('', cat);
+    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
