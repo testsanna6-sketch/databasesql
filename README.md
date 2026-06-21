@@ -1,5 +1,4 @@
-﻿# databasesql
- # 🛍 ShopDaily — Final Project
+# 🛍 ShopDaily — Final Project
 
 A full-stack e-commerce web application built with PHP, MySQL, Bootstrap 5, and vanilla JavaScript.
 
@@ -19,7 +18,76 @@ A full-stack e-commerce web application built with PHP, MySQL, Bootstrap 5, and 
 
 ---
 
-## 🗂 Project Structure
+## � Project Flow
+
+```
+User visits index.html
+        │
+        ▼
+┌─────────────────────┐
+│     Homepage        │  ← Browse products, search, filter by category, sort
+│    index.html       │
+└────────┬────────────┘
+         │
+         │  Click product card
+         ▼
+┌─────────────────────┐
+│   Product Detail    │  ← View full info: image, price, stock, description
+│    detail.html      │
+└────────┬────────────┘
+         │
+         │  Click "Add to Cart"
+         ▼
+┌─────────────────────┐
+│   Shopping Cart     │  ← Adjust quantity, remove items, see total + tax
+│     cart.html       │
+└────────┬────────────┘
+         │
+         │  Click "Proceed to Checkout"
+         ▼
+    (Checkout page — future feature)
+
+
+── Admin Flow ──────────────────────────────────────────
+
+Admin visits manage.html
+        │
+        ▼
+┌─────────────────────┐
+│    Admin Panel      │  ← View dashboard stats, search & filter products
+│    manage.html      │
+└────────┬────────────┘
+         │
+    ┌────┴─────┐
+    ▼          ▼
+ Create      Edit / Delete
+ Product     Product
+    │          │
+    └────┬─────┘
+         ▼
+  PHP REST API (api/products.php)
+         │
+         ▼
+   MySQL Database (shop_db)
+
+
+── Data Flow ───────────────────────────────────────────
+
+Browser (HTML/JS)
+    │  fetch()
+    ▼
+api/products.php  ←→  api/config.php (DB connection)
+    │
+    ▼
+MySQL — shop_db.products table
+    │
+    ▼
+JSON response → rendered in browser
+```
+
+---
+
+## �🗂 Project Structure
 
 ```
 project/
@@ -195,4 +263,3 @@ http://localhost/phptest/finalsql/project/index.html
 | Shopping Cart | `http://localhost/phptest/finalsql/project/cart.html` |
 | Admin Manage | `http://localhost/phptest/finalsql/project/manage.html` |
 | API Test | `http://localhost/phptest/finalsql/project/api/products.php` |
-
