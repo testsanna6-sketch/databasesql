@@ -1,7 +1,3 @@
--- Create and use database
-CREATE DATABASE IF NOT EXISTS shop_db;
-USE shop_db;
-
 -- Products table
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
