@@ -58,7 +58,7 @@ function renderCartPage() {
         return;
     }
 
-    const BASE = 'http://localhost/phptest/finalsql/project/';
+    const BASE = 'https://shopdaily.great-site.net/project/';
 
     container.innerHTML = cart.map(item => {
         const imgSrc = item.image && item.image.startsWith('http')

@@ -1,7 +1,7 @@
 // ── Config ────────────────────────────────────────────────────
-const API_URL    = 'http://localhost/phptest/finalsql/project/api/products.php';
-const UPLOAD_URL = 'http://localhost/phptest/finalsql/project/api/upload.php';
-const BASE_URL   = 'http://localhost/phptest/finalsql/project/';
+const API_URL    = 'https://shopdaily.great-site.net/project/api/products.php';
+const UPLOAD_URL = 'https://shopdaily.great-site.net/project/api/upload.php';
+const BASE_URL   = 'https://shopdaily.great-site.net/project/';
 const PER_PAGE   = 8; // products per page
 
 // ── State ─────────────────────────────────────────────────────

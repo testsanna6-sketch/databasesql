@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS products (
 INSERT INTO products (name, description, price, image, category, stock) VALUES
 
 -- Electronics
-/* ('iPhone 15 Pro', 'Apple iPhone 15 Pro with A17 Pro chip, titanium design and 48MP camera system.', 999.99,
+('iPhone 15 Pro', 'Apple iPhone 15 Pro with A17 Pro chip, titanium design and 48MP camera system.', 999.99,
  'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=300&fit=crop&auto=format', 'Electronics', 50),
 
 ('Samsung Galaxy S24', 'Flagship Android phone with Galaxy AI, 200MP camera and Snapdragon 8 Gen 3.', 899.99,
@@ -110,4 +110,4 @@ INSERT INTO products (name, description, price, image, category, stock) VALUES
  'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=300&fit=crop&auto=format', 'Games', 70),
 
 ('Gaming Mouse', 'High-precision optical gaming mouse, 16000 DPI, programmable buttons and RGB lighting.', 49.99,
- 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop&auto=format', 'Games', 90); */
+ 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop&auto=format', 'Games', 90);

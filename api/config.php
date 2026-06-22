@@ -1,9 +1,9 @@
 <?php
 // Database configuration
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');       // Change to your MySQL username
-define('DB_PASS', '');           // Change to your MySQL password
-define('DB_NAME', 'shop_db');
+define('DB_HOST', 'sql306.infinityfree.com');
+define('DB_USER', 'if0_42240276');
+define('DB_PASS', 'IJeQJyuVEgo');
+define('DB_NAME', 'if0_42240276_shop_db');
 
 // CORS headers - allow frontend to call the API
 header('Access-Control-Allow-Origin: *');
